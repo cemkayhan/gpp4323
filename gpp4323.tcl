@@ -96,6 +96,19 @@ proc ocp {fid ch amp} {
   puts $fid ":OUTPut${ch}:OCP ${amp}"
 }
 
+proc settings {fid ch chSettings} {
+  upvar $chSettings localChSettings
+
+  puts "[idn? $fid]"
+  puts "---------------------------- CHANNEL ${ch} ----------------------------"
+  puts "Overvoltage protection SET?    : $localChSettings(OvervoltageProtection)"
+  puts "Overcurrent protection SET?    : $localChSettings(OvercurrentProtection)"
+  puts ""
+  puts "Voltage SET?                   : $localChSettings(Voltage)"
+  puts "Current SET?                   : $localChSettings(Current)"
+  puts "---------------------------- CHANNEL ${ch} ----------------------------"
+}
+
 proc status {fid ch} {
   puts "[idn? $fid]"
   puts "---------------------------- CHANNEL ${ch} ----------------------------"
@@ -159,6 +172,12 @@ proc chon {fid ch chSettings} {
     puts "Current SET? !!! FAILED !!!"
     return
   }
+
+  on $fid $ch
+  if {"ON"!=[onoff? $fid $ch]} {
+    puts "Channel ${ch} ON/OFF? !!! FAILED !!!"
+    return
+  }
 }
 
 if {[info exists argv0] && $argv0 eq [info script]} {
@@ -174,6 +193,8 @@ if {[info exists argv0] && $argv0 eq [info script]} {
       status $fid 1
     } elseif {"status"==[lindex $argv 1]} {
       status $fid 1
+    } elseif {"settings"==[lindex $argv 1]} {
+      settings $fid 1 ch1Settings
     }
   } elseif {"ch2"==[lindex $argv 0]} {
     if {"on"==[lindex $argv 1]} {
@@ -184,6 +205,8 @@ if {[info exists argv0] && $argv0 eq [info script]} {
       status $fid 2
     } elseif {"status"==[lindex $argv 1]} {
       status $fid 2
+    } elseif {"settings"==[lindex $argv 1]} {
+      settings $fid 2 ch2Settings
     }
   } elseif {"ch3"==[lindex $argv 0]} {
     if {"on"==[lindex $argv 1]} {
@@ -194,6 +217,8 @@ if {[info exists argv0] && $argv0 eq [info script]} {
       status $fid 3
     } elseif {"status"==[lindex $argv 1]} {
       status $fid 3
+    } elseif {"settings"==[lindex $argv 1]} {
+      settings $fid 3 ch3Settings
     }
   } elseif {"ch4"==[lindex $argv 0]} {
     if {"on"==[lindex $argv 1]} {
@@ -204,6 +229,8 @@ if {[info exists argv0] && $argv0 eq [info script]} {
       status $fid 4
     } elseif {"status"==[lindex $argv 1]} {
       status $fid 4
+    } elseif {"settings"==[lindex $argv 1]} {
+      settings $fid 4 ch4Settings
     }
   }
 }
