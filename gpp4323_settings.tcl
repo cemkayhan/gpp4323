@@ -7,7 +7,8 @@ proc gp4323_settings {} {
   global ch3Settings
   global ch4Settings
 
-  set serialPath /dev/ttyUSB1
+  #set serialPath /dev/ttyUSB3
+  set serialPath /dev/gpp4323
 
   array set ch1Settings {}
   set ch1Settings(OvervoltageProtection) 32.000
