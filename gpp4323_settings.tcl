@@ -23,16 +23,16 @@ proc gp4323_settings {} {
   set ch2Settings(Current) 3.000
   
   array set ch3Settings {}
-  set ch3Settings(OvervoltageProtection) 5.000
-  set ch3Settings(OvercurrentProtection) 1.000
+  set ch3Settings(OvervoltageProtection) 6.000
+  set ch3Settings(OvercurrentProtection) 1.200
   set ch3Settings(Voltage) 5.000
   set ch3Settings(Current) 1.000
   
   array set ch4Settings {}
-  set ch4Settings(OvervoltageProtection) 5.000
-  set ch4Settings(OvercurrentProtection) 1.100
-  set ch4Settings(Voltage) 5.000
-  set ch4Settings(Current) 1.000
+  set ch4Settings(OvervoltageProtection) 16.000
+  set ch4Settings(OvercurrentProtection) 1.200
+  set ch4Settings(Voltage) 12.000
+  set ch4Settings(Current) 1.100
 }
 
 if {[info exists argv0] && $argv0 eq [info script]} {
